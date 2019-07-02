@@ -7,4 +7,4 @@ echo "Compiling psroi pooling kernels by nvcc..."
 ${CUDA_PATH}/bin/nvcc -c -o psroi_pooling.cu.o psroi_pooling_kernel.cu -x cu -Xcompiler -fPIC -arch=sm_52
 
 cd ../../
-python build.py
+python3 build.py

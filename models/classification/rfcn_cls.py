@@ -39,7 +39,7 @@ class Model(nn.Module):
                         nn.Conv2d(in_channels, out_channels, 3, padding=1, bias=True),
                         nn.BatchNorm2d(out_channels),
                         nn.ReLU(inplace=True),
-                        nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False),
+                        nn.Upsample(scale_factor=2, mode='bilinear'),
                     ))
 
             feat_channels = n_feats[-1-i]

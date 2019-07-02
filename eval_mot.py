@@ -86,7 +86,7 @@ def eval_seq(dataloader, data_type, result_filename, save_dir=None, show_image=T
     write_results(result_filename, results, data_type)
 
 
-def main(data_root='/data/MOT16/train', det_root=None,
+def main(data_root='./data/MOT16/train', det_root=None,
          seqs=('MOT16-05',), exp_name='demo', save_image=False, show_image=True):
     logger.setLevel(logging.INFO)
     result_root = os.path.join(data_root, '..', 'results', exp_name)
@@ -121,7 +121,7 @@ def main(data_root='/data/MOT16/train', det_root=None,
         namemap=mm.io.motchallenge_metric_names
     )
     print(strsummary)
-    Evaluator.save_summary(summary, os.path.join(result_root, f'summary_{exp_name}.xlsx'))
+    Evaluator.save_summary(summary, os.path.join(result_root, 'summary_{}.xlsx'.format(exp_name)))
 
     # # eval
     # try:
@@ -152,7 +152,7 @@ if __name__ == '__main__':
                 MOT16-13'''
     seqs = [seq.strip() for seq in seqs_str.split()]
 
-    main(data_root='/data/MOT16/train',
+    main(data_root='./data/MOT16/train',
          seqs=seqs,
          exp_name='mot16_val',
          show_image=False)
