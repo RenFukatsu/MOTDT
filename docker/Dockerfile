@@ -13,19 +13,20 @@ RUN apt-get install -y --no-install-recommends \
 
 RUN pip3 install --upgrade pip
 
-RUN pip3 install numpy \
-                 h5py \
-                 Cython \
-                 scipy \
-                 imageio \
+RUN pip3 install numpy==1.16.4 \
+                 h5py==2.9.0 \
+                 Cython==0.29.11 \
+                 scipy==1.3.0 \
+                 imageio==2.5.0 \
                  torch==0.3.1 \
                  torchvision==0.2.0 \
-                 opencv-python \
-                 cffi \
-                 sklearn \
-                 numba \
-                 fire \
-                 motmetrics
+                 opencv-python==4.1.0.25 \
+                 cffi==1.12.3 \
+                 sklearn==0.19 \
+                 numba==0.43 \
+                 fire==0.1.3 \
+                 openpyxl==2.6.2 \
+                 motmetrics == 1.1.3
 
 # nvidia environment
 ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
