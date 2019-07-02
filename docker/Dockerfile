@@ -17,7 +17,7 @@ RUN pip3 install numpy \
                  h5py \
                  Cython \
                  scipy \
-                 matplotlib \
+                 imageio \
                  torch==0.3.1 \
                  torchvision==0.2.0 \
                  opencv-python \
