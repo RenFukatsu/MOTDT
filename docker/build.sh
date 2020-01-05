@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build . -t motdt
+docker build . -t motdt_ros2
