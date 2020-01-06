@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'MOTDT'
+package_name = 'motdt_ros2'
 
 setup(
     name=package_name,

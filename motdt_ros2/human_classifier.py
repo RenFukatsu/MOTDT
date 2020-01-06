@@ -1,19 +1,36 @@
+import numpy as np
+import cv2
+
 import rclpy
 from rclpy.node import Node
-import numpy as np
-
 from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+from cv_bridge import CvBridgeError
+import message_filters
 
 from models.classification.classifier import PatchClassifier
 from models.reid import load_reid_model, extract_reid_features
 
-class HumanClassifier():
+class HumanClassifier(Node):
 
     def __init__(self, min_cls_score=0.4, use_refind=True):
+        super().__init__("motdt_classifier")
+        self.image_sub = message_filters.Subscriber('/usb_cam/image_raw', Image)
+        self.bboxes_sub = message_filters.Subscriber('/yolo/bboxes', BBox)
+        self.time_synchronizer = message_filters.TimeSynchronizer([self.image_sub, self.bboxes_sub], 10)
+        self.time_synchronizer.registerCallback(self.callback)
+        self.bridge = CvBridge()
         self.min_cls_score = min_cls_score
         self.use_refind = use_refind
         self.classifier = PatchClassifier()
         self.reid_model = load_reid_model()
+    
+    def callback(self, image, bboxes):
+        try:
+            cv_image = self.bridge.imgmsg_to_cv2(image, 'rgb8')
+        except CvBridgeError as e:
+            print(e)
+
     
     def get_scores(self, image, tlwhs, det_scores):
         self.classifier.update(image)
@@ -35,6 +52,12 @@ class HumanClassifier():
         return features
 
 
+def main(args=None):
+    rclpy.init(args=args)
+    human_classifier = HumanClassifier()
+    rclpy.spin(human_classifier)
+    human_classifier.destroy_node()
+    rclpy.shutdown()
 
-
-
+if __name__ == '__main__':
+    main()
