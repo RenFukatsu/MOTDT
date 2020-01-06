@@ -18,6 +18,6 @@ docker run -it --rm \
   --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
   --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
   --net="host" \
-  --volume="$SCRIPT_DIR/../:/root/$IMAGE_NAME/" \
+  --volume="$SCRIPT_DIR/../:/root/colcon_ws/src/MOTDT/" \
   $IMAGE_NAME \
   bash
